@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palm Beach Vacation Rentals | Lee &amp; Michelle's Homes</title>
+<meta name="description" content="Book Lee &amp; Michelle's private vacation homes in Palm Beach, Florida. Self check-in, private pools, free parking and pet-friendly stays in quiet areas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS (single source of truth, nothing hardcoded below)
+   ============================================================ */
+:root{
+  /* color */
+  --bg:#F7F4EE;
+  --surface:#FFFFFF;
+  --surface-alt:#EFEAE0;
+  --ink:#1F2D28;
+  --ink-soft:#5A6862;
+  --ink-faint:#8B958F;
+  --accent:#3E6B5C;
+  --accent-deep:#2A4C40;
+  --accent-soft:#E2EAE5;
+  --gold:#B99A6F;
+  --line:#E3DCCE;
+  --on-accent:#FFFFFF;
+  /* type */
+  --font-display:'Fraunces',Georgia,serif;
+  --font-body:'Inter',system-ui,sans-serif;
+  --text-xs:0.78rem;
+  --text-sm:0.875rem;
+  --text-base:1rem;
+  --text-lg:1.125rem;
+  --text-xl:1.45rem;
+  --text-2xl:2rem;
+  --text-3xl:2.75rem;
+  --text-hero:clamp(2.4rem,5.5vw,4rem);
+  --leading-body:1.7;
+  --leading-tight:1.15;
+  --tracking-wide:0.14em;
+  /* space */
+  --space-1:0.25rem;
+  --space-2:0.5rem;
+  --space-3:0.75rem;
+  --space-4:1rem;
+  --space-5:1.5rem;
+  --space-6:2rem;
+  --space-7:3rem;
+  --space-8:4.5rem;
+  --space-9:6.5rem;
+  /* radius and shadow */
+  --radius-sm:0.5rem;
+  --radius-md:1rem;
+  --radius-lg:1.5rem;
+  --radius-pill:999px;
+  --shadow-sm:0 1px 3px rgba(31,45,40,0.06);
+  --shadow-md:0 10px 30px rgba(31,45,40,0.10);
+  --shadow-lg:0 24px 60px rgba(31,45,40,0.14);
+  /* layout */
+  --container:72rem;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:var(--text-base);line-height:var(--leading-body)}
+img{display:block;max-width:100%;height:100%;width:100%;object-fit:cover;background:var(--surface-alt)}
+a{color:inherit;text-decoration:none}
+.container{max-width:var(--container);margin-inline:auto;padding-inline:var(--space-5)}
+.eyebrow{font-size:var(--text-xs);font-weight:600;letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--accent);margin-bottom:var(--space-3)}
+h1,h2,h3{font-family:var(--font-display);font-weight:500;line-height:var(--leading-tight)}
+h2{font-size:var(--text-2xl)}
+.section{padding-block:var(--space-9)}
+.section-head{max-width:38rem;margin-bottom:var(--space-7)}
+.section-head.center{margin-inline:auto;text-align:center}
+.muted{color:var(--ink-soft)}
+.btn{display:inline-flex;align-items:center;gap:var(--space-2);font-family:var(--font-body);font-size:var(--text-sm);font-weight:600;border:none;cursor:pointer;border-radius:var(--radius-pill);padding:var(--space-3) var(--space-5);transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.btn-primary{background:var(--accent-deep);color:var(--on-accent)}
+.btn-primary:hover{background:var(--accent)}
+.btn-ghost{background:transparent;color:var(--accent-deep);box-shadow:inset 0 0 0 1px var(--line)}
+
+/* ============================================================
+   TOP BAR + NAV
+   ============================================================ */
+.topbar{background:var(--accent-deep);color:var(--on-accent);font-size:var(--text-xs)}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;padding-block:var(--space-2);gap:var(--space-4)}
+.topbar a:hover{opacity:.8}
+.topbar-group{display:flex;gap:var(--space-5);align-items:center;flex-wrap:wrap}
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .container{display:flex;justify-content:space-between;align-items:center;padding-block:var(--space-4)}
+.brand{font-family:var(--font-display);font-size:var(--text-lg);line-height:1.1}
+.brand small{display:block;font-family:var(--font-body);font-size:var(--text-xs);letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--ink-soft)}
+.nav-links{display:flex;gap:var(--space-6);align-items:center;list-style:none;font-size:var(--text-sm);font-weight:500}
+.nav-links a{color:var(--ink-soft);transition:color .2s}
+.nav-links a:hover{color:var(--accent-deep)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero .container{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--space-7);align-items:center;padding-block:var(--space-8)}
+.hero h1{font-size:var(--text-hero);margin-bottom:var(--space-4)}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero p{color:var(--ink-soft);font-size:var(--text-lg);max-width:30rem;margin-bottom:var(--space-6)}
+.hero-media{position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/4.6;box-shadow:var(--shadow-lg)}
+.hero-badge{position:absolute;bottom:var(--space-4);left:var(--space-4);right:var(--space-4);background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border-radius:var(--radius-md);padding:var(--space-3) var(--space-4);font-size:var(--text-sm);color:var(--ink-soft);box-shadow:var(--shadow-sm)}
+.booking{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:var(--space-2);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);padding:var(--space-3);box-shadow:var(--shadow-md);max-width:34rem}
+.booking label{display:block;font-size:var(--text-xs);font-weight:600;letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--ink-faint);padding:var(--space-1) var(--space-2) 0}
+.booking input,.booking select{width:100%;border:none;background:transparent;font-family:var(--font-body);font-size:var(--text-sm);color:var(--ink);padding:var(--space-1) var(--space-2) var(--space-2)}
+.booking input:focus,.booking select:focus{outline:2px solid var(--accent-soft);border-radius:var(--radius-sm)}
+.booking .field+.field{border-left:1px solid var(--line)}
+.booking .btn{align-self:center}
+
+/* ============================================================
+   FACILITIES
+   ============================================================ */
+.facilities{background:var(--surface)}
+.fac-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-5)}
+.fac-card{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-md);padding:var(--space-6) var(--space-5);transition:transform .25s ease,box-shadow .25s ease}
+.fac-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.fac-icon{width:var(--space-7);height:var(--space-7);display:grid;place-items:center;background:var(--accent-soft);color:var(--accent-deep);border-radius:var(--radius-pill);margin-bottom:var(--space-4);font-size:var(--text-xl)}
+.fac-card h3{font-size:var(--text-lg);margin-bottom:var(--space-2)}
+.fac-card p{font-size:var(--text-sm);color:var(--ink-soft)}
+
+/* ============================================================
+   SPLIT SECTIONS (About / Location / Gallery)
+   ============================================================ */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-8);align-items:center}
+.split.reverse .split-media{order:2}
+.split-media{border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:5/4;box-shadow:var(--shadow-md)}
+.split-copy h2{margin-bottom:var(--space-4)}
+.split-copy p{color:var(--ink-soft);margin-bottom:var(--space-4)}
+.split-copy .btn{margin-top:var(--space-2)}
+
+/* ============================================================
+   HOMES
+   ============================================================ */
+.homes{background:var(--surface)}
+.homes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-5)}
+.home-card{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease}
+.home-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.home-card .media{aspect-ratio:4/3;overflow:hidden}
+.home-card .media img{transition:transform .6s ease}
+.home-card:hover .media img{transform:scale(1.05)}
+.home-body{padding:var(--space-5);display:flex;flex-direction:column;flex:1;gap:var(--space-3)}
+.home-body h3{font-size:var(--text-xl)}
+.home-body .tag{font-size:var(--text-xs);font-weight:600;letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--gold)}
+.home-body p{font-size:var(--text-sm);color:var(--ink-soft);flex:1}
+.home-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:var(--space-4)}
+.price{font-family:var(--font-display);font-size:var(--text-lg);color:var(--accent-deep)}
+.price span{font-family:var(--font-body);font-size:var(--text-xs);color:var(--ink-faint)}
+.link-arrow{font-size:var(--text-sm);font-weight:600;color:var(--accent-deep)}
+.link-arrow:hover{color:var(--accent)}
+
+/* ============================================================
+   GALLERY STRIP
+   ============================================================ */
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3);margin-top:var(--space-6)}
+.gallery-grid figure{border-radius:var(--radius-md);overflow:hidden;aspect-ratio:1/1}
+.gallery-grid figure:nth-child(2),.gallery-grid figure:nth-child(3){aspect-ratio:1/1.25}
+
+/* ============================================================
+   REVIEWS
+   ============================================================ */
+.reviews{background:var(--accent-deep);color:var(--on-accent)}
+.reviews .eyebrow{color:var(--gold)}
+.review-quote{font-family:var(--font-display);font-size:var(--text-xl);line-height:1.5;max-width:46rem;margin-inline:auto;text-align:center}
+.review-meta{text-align:center;margin-top:var(--space-5);font-size:var(--text-sm);opacity:.75}
+.stars{text-align:center;color:var(--gold);letter-spacing:var(--space-1);margin-bottom:var(--space-5);font-size:var(--text-lg)}
+
+/* ============================================================
+   CTA + FOOTER
+   ============================================================ */
+.cta{text-align:center}
+.cta h2{font-size:var(--text-3xl);max-width:30rem;margin-inline:auto;margin-bottom:var(--space-5)}
+footer{background:var(--ink);color:var(--bg)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:var(--space-7);padding-block:var(--space-8)}
+.foot-grid h3{font-size:var(--text-sm);letter-spacing:var(--tracking-wide);text-transform:uppercase;font-family:var(--font-body);font-weight:600;color:var(--gold);margin-bottom:var(--space-4)}
+.foot-grid p,.foot-grid a{font-size:var(--text-sm);color:color-mix(in srgb,var(--bg) 75%,transparent)}
+.foot-grid li{list-style:none;margin-bottom:var(--space-2)}
+.foot-grid a:hover{color:var(--bg)}
+.foot-bottom{border-top:1px solid color-mix(in srgb,var(--bg) 15%,transparent);padding-block:var(--space-4);display:flex;justify-content:space-between;font-size:var(--text-xs);color:color-mix(in srgb,var(--bg) 55%,transparent)}
+.social{display:flex;gap:var(--space-3);margin-top:var(--space-4)}
+.social a{display:grid;place-items:center;width:var(--space-6);height:var(--space-6);border-radius:var(--radius-pill);background:color-mix(in srgb,var(--bg) 12%,transparent);font-size:var(--text-xs)}
+.social a:hover{background:var(--accent)}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:64rem){
+  .hero .container,.split,.split.reverse{grid-template-columns:1fr}
+  .split.reverse .split-media{order:0}
+  .fac-grid{grid-template-columns:repeat(2,1fr)}
+  .homes-grid{grid-template-columns:1fr;max-width:28rem;margin-inline:auto}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr;gap:var(--space-6)}
+  .nav-links{display:none}
+  .booking{grid-template-columns:1fr 1fr;max-width:none}
+  .booking .field+.field{border-left:none}
+  .booking .btn{grid-column:1/-1;justify-content:center}
+}
+@media (max-width:40rem){
+  .fac-grid{grid-template-columns:1fr}
+  .topbar .topbar-group:last-child{display:none}
+  .section{padding-block:var(--space-8)}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-group">
+      <a href="tel:3473894719">347-389-4719</a>
+      <span>Palm Beach, Florida</span>
+    </div>
+    <div class="topbar-group">
+      <span>USD</span>
+      <a href="#contact">My Account</a>
+      <a href="#book" style="font-weight:600">Book Now</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container">
+    <a class="brand" href="#home">Lee &amp; Michelle's
+      <small>Palm Beach Vacation Homes</small>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#homes">Vacation Homes</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+      <li><a class="btn btn-primary" href="#book">Book Now</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="home">
+  <div class="container">
+    <div>
+      <p class="eyebrow">Private vacation rentals in Palm Beach, Florida</p>
+      <h1>Lee &amp; Michelle's <em>Vacation Homes</em></h1>
+      <p>You'll find private, professionally cleaned homes minutes from the beach, with self check-in, free parking and pet-friendly options. It's the calm side of Palm Beach.</p>
+      <form class="booking" id="book" onsubmit="return false">
+        <div class="field">
+          <label for="checkin">Check in</label>
+          <input type="date" id="checkin" name="checkin">
+        </div>
+        <div class="field">
+          <label for="checkout">Check out</label>
+          <input type="date" id="checkout" name="checkout">
+        </div>
+        <div class="field">
+          <label for="guests">Guests</label>
+          <select id="guests" name="guests">
+            <option>1 guest</option>
+            <option>2 guests</option>
+            <option>3 guests</option>
+            <option>4 guests</option>
+            <option>5+ guests</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="hero-media">
+      <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=70" alt="Private vacation home with pool in Palm Beach, Florida" loading="eager">
+      <div class="hero-badge">Fully private homes with a 45-point professional cleaning process</div>
+    </div>
+  </div>
+</header>
+
+<!-- FACILITIES -->
+<section class="facilities section">
+  <div class="container">
+    <div class="section-head center">
+      <p class="eyebrow">Our Facilities</p>
+      <h2>Everything's ready when you arrive</h2>
+    </div>
+    <div class="fac-grid">
+      <div class="fac-card">
+        <div class="fac-icon" aria-hidden="true">&#128273;</div>
+        <h3>Self Check-In</h3>
+        <p>You'll check yourself in anytime with the smart lock, so there's no waiting around for keys.</p>
+      </div>
+      <div class="fac-card">
+        <div class="fac-icon" aria-hidden="true">&#127946;</div>
+        <h3>Swimming Pool</h3>
+        <p>Private swimming pools at select locations, perfect for cooling off after a beach day.</p>
+      </div>
+      <div class="fac-card">
+        <div class="fac-icon" aria-hidden="true">&#128663;</div>
+        <h3>Free Parking on Premises</h3>
+        <p>Enjoy the ease of free parking directly on the property for all guests.</p>
+      </div>
+      <div class="fac-card">
+        <div class="fac-icon" aria-hidden="true">&#127794;</div>
+        <h3>Prime Quiet Neighborhood</h3>
+        <p>Stay close to everything while enjoying the tranquility of a quiet neighborhood.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container split">
+    <div class="split-copy">
+      <p class="eyebrow">About Us</p>
+      <h2>A stay that feels like home, only better</h2>
+      <p>We're dedicated to offering a luxurious and comfortable experience for all our guests. Nestled in beautiful Palm Beach, our properties provide a perfect blend of relaxation and convenience, with close access to top attractions, beaches, and local gems.</p>
+      <p>Each home is meticulously maintained, professionally cleaned with a 45-point process, and features amenities to make your stay memorable, including pet-friendly options and fully private properties. Our goal is to make every moment enjoyable.</p>
+      <a class="btn btn-ghost" href="#homes">Learn More</a>
+    </div>
+    <div class="split-media">
+      <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=70" alt="Bright modern living room inside one of our Palm Beach vacation homes" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="section" style="padding-top:0">
+  <div class="container split reverse">
+    <div class="split-copy">
+      <p class="eyebrow">Great Location</p>
+      <h2>The best of Palm Beach at your doorstep</h2>
+      <p>Lee &amp; Michelle's Palm Beach Vacation Rentals offer the perfect location to experience the best of Palm Beach. Our properties are situated close to top attractions, stunning beaches, vibrant dining, and shopping options, all while nestled in quiet and serene neighborhoods for a relaxing stay.</p>
+      <p>Enjoy the convenience and charm of Palm Beach right at your doorstep. You're never more than a few minutes from the water.</p>
+      <a class="btn btn-ghost" href="#contact">Learn More</a>
+    </div>
+    <div class="split-media">
+      <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=1000&q=70" alt="Backyard pool and lounge chairs at a Palm Beach vacation rental" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- VACATION HOMES -->
+<section class="homes section" id="homes">
+  <div class="container">
+    <div class="section-head center">
+      <p class="eyebrow">Our Vacation Homes</p>
+      <h2>Pick the home that fits your getaway</h2>
+      <p class="muted" style="margin-top:var(--space-4)">We take pride in offering a selection of beautiful, fully equipped homes designed for comfort and relaxation. We've curated each property as a welcoming retreat with spacious living areas, private fenced backyards, free on-premises parking, pet-friendly options, and professional cleaning, all in safe, quiet neighborhoods close to Palm Beach's best attractions.</p>
+    </div>
+    <div class="homes-grid">
+      <article class="home-card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=70" alt="Royal Palm Villa exterior and patio" loading="lazy">
+        </div>
+        <div class="home-body">
+          <span class="tag">4 Bed / 2 Bath / Sleeps 8</span>
+          <h3>Royal Palm Villa - 756</h3>
+          <p>A spacious 4-bed, 2-bath retreat with 8 beds and a large fenced-in backyard, perfect for families and groups. It's nestled on quiet, peaceful streets just 15 minutes from PBI Airport, 2 minutes from Downtown at the Gardens and Trader Joe's, and only 5 minutes to the beach. Stylish, comfortable, and close to everything Palm Beach has to offer.</p>
+          <div class="home-foot">
+            <span class="price">From $500 <span>/ night</span></span>
+            <a class="link-arrow" href="#book">View Room &rsaquo;</a>
+          </div>
+        </div>
+      </article>
+      <article class="home-card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=70" alt="The Veranda Villa dining and living space" loading="lazy">
+        </div>
+        <div class="home-body">
+          <span class="tag">4 Bed / 2 Bath / Sleeps 8</span>
+          <h3>The Veranda Villa - 936</h3>
+          <p>A welcoming 4-bed, 2-bath getaway with 8 beds and a large fenced-in backyard that's made for families and groups. You're just 15 minutes from PBI Airport, 2 minutes from Downtown at the Gardens and Trader Joe's, and 5 minutes to the beach. Modern, comfortable, and close to everything Palm Beach has to offer.</p>
+          <div class="home-foot">
+            <span class="price">From $500 <span>/ night</span></span>
+            <a class="link-arrow" href="#book">View Room &rsaquo;</a>
+          </div>
+        </div>
+      </article>
+      <article class="home-card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=70" alt="Bedroom at Florida's Finest Living vacation home" loading="lazy">
+        </div>
+        <div class="home-body">
+          <span class="tag">Backyard / Mini Golf / Firepit</span>
+          <h3>Florida's Finest Living - 712</h3>
+          <p>Indulge in Florida's finest living. This fully furnished home offers a serene backyard with mini golf, volleyball, lounge chairs, a firepit, and a hammock. It's just 5 minutes from downtown, 5 minutes to the beach, and 15 minutes from the airport.</p>
+          <div class="home-foot">
+            <span class="price">From $500 <span>/ night</span></span>
+            <a class="link-arrow" href="#book">View Room &rsaquo;</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section" id="gallery">
+  <div class="container">
+    <div class="split">
+      <div class="split-copy">
+        <p class="eyebrow">Photo Gallery</p>
+        <h2>Get a glimpse of paradise</h2>
+        <p>Explore the charm and elegance of Lee &amp; Michelle's Palm Beach Vacation Rentals. Each image showcases the inviting interiors, beautifully maintained outdoor spaces, and tranquil surroundings of our properties, giving you a preview of what's waiting.</p>
+        <p>Browse through to see our spacious rooms, cozy living areas, private fenced backyards, and the serene neighborhood settings. That's what makes our rentals the perfect choice for a Palm Beach getaway.</p>
+        <a class="btn btn-primary" href="#gallery">Open Gallery</a>
+      </div>
+      <div class="gallery-grid" style="margin-top:0">
+        <figure><img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=600&q=70" alt="Modern kitchen with dark cabinets" loading="lazy"></figure>
+        <figure><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=70" alt="Sunlit lounge area" loading="lazy"></figure>
+        <figure><img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=70" alt="Cozy living room seating" loading="lazy"></figure>
+        <figure><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=600&q=70" alt="Bright modern bathroom" loading="lazy"></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews section">
+  <div class="container">
+    <p class="eyebrow" style="text-align:center">Reviews</p>
+    <div class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <blockquote class="review-quote">"This house was great for my family! It had 4 big bedrooms, was really tidy, and had lots of room. Each room wasn't only spacious but also thoughtfully designed, making our time there extremely comfortable. From the cozy living areas to the well-appointed bedrooms, every corner of the house felt inviting. The host's care showed in every detail."</blockquote>
+    <p class="review-meta">Yaakov, verified guest</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta section">
+  <div class="container">
+    <p class="eyebrow">Ready when you are</p>
+    <h2>Your Palm Beach getaway starts here</h2>
+    <p class="muted" style="margin-bottom:var(--space-6)">Don't wait for the good dates to go. Check availability and we'll have everything ready for you.</p>
+    <a class="btn btn-primary" href="#book">Book Now</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#home" style="color:inherit">Lee &amp; Michelle's
+          <small style="color:inherit;opacity:.6">Palm Beach Vacation Homes</small>
+        </a>
+        <p style="margin-top:var(--space-4)">Private, professionally cleaned vacation homes in quiet Palm Beach neighborhoods.</p>
+        <div class="social">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Twitter">t</a>
+        </div>
+      </div>
+      <div>
+        <h3>Follow Us</h3>
+        <p>Keep up to date with Lee &amp; Michelle's Palm Beach Vacation Homes.</p>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li>Palm Beach County, Florida</li>
+          <li><a href="tel:3473894719">347-389-4719</a></li>
+          <li><a href="mailto:leib@urwex.com">leib@urwex.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Lee &amp; Michelle's Palm Beach Vacation Homes. All Rights Reserved.</span>
+      <span>Currency: USD</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
