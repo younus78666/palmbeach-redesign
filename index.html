@@ -246,8 +246,16 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .cta-card::after{bottom:calc(var(--space-7) * -1);right:calc(var(--space-7) * -1)}
 .cta-card h2{font-size:var(--text-3xl);max-width:32rem;margin-inline:auto;margin-bottom:var(--space-4)}
 .cta-card .muted{max-width:28rem;margin-inline:auto;margin-bottom:var(--space-6)}
+/* pre-footer keyword band */
+.prefooter{background:var(--surface-alt);border-top:1px solid var(--line);padding-block:var(--space-8)}
+.prefooter .eyebrow{margin-bottom:var(--space-3)}
+.prefooter h2{font-size:var(--text-xl);margin-bottom:var(--space-2)}
+.prefooter p{font-size:var(--text-sm);color:var(--ink-soft);max-width:38rem}
+.kw-chips{display:flex;flex-wrap:wrap;gap:var(--space-3);margin-top:var(--space-6)}
+.kw-chip{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-sm);font-weight:500;color:var(--accent-deep);background:var(--surface);border:1.5px solid var(--gold);border-radius:var(--radius-pill);padding:var(--space-2) var(--space-5);transition:background .25s ease,color .25s ease,transform .2s ease,box-shadow .2s ease}
+.kw-chip:hover{background:var(--gold);color:var(--on-accent);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
 footer{background:var(--ink);color:var(--bg)}
-.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:var(--space-7);padding-block:var(--space-8)}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1.2fr;gap:var(--space-6);padding-block:var(--space-8)}
 .foot-grid h3{font-size:var(--text-sm);letter-spacing:var(--tracking-wide);text-transform:uppercase;font-family:var(--font-body);font-weight:600;color:var(--gold);margin-bottom:var(--space-4)}
 .foot-grid p,.foot-grid a{font-size:var(--text-sm);color:color-mix(in srgb,var(--bg) 75%,transparent)}
 .foot-grid li{list-style:none;margin-bottom:var(--space-3)}
@@ -266,7 +274,8 @@ footer{background:var(--ink);color:var(--bg)}
   .fac-grid{grid-template-columns:repeat(2,1fr)}
   .homes-grid{grid-template-columns:1fr;max-width:28rem;margin-inline:auto}
   .gallery-grid{grid-template-columns:repeat(2,1fr)}
-  .foot-grid{grid-template-columns:1fr;gap:var(--space-6)}
+  .foot-grid{grid-template-columns:repeat(2,1fr);gap:var(--space-6)}
+  .foot-grid>div:first-child{grid-column:1/-1}
   .nav-links{display:none}
   .booking{grid-template-columns:1fr 1fr}
   .booking .btn{grid-column:1/-1}
@@ -274,6 +283,7 @@ footer{background:var(--ink);color:var(--bg)}
 }
 @media (max-width:40rem){
   .fac-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
   .topbar .topbar-group:last-child{display:none}
   .section{padding-block:var(--space-8)}
   .booking{grid-template-columns:1fr;padding:var(--space-5)}
@@ -556,6 +566,27 @@ footer{background:var(--ink);color:var(--bg)}
   </div>
 </section>
 
+<!-- PRE-FOOTER -->
+<section class="prefooter">
+  <div class="container">
+    <p class="eyebrow">Vacation Rental Locations</p>
+    <h2>Stays across the Palm Beaches</h2>
+    <p>Our homes put you minutes from the area's favorite beaches, dining and attractions. Explore vacation rentals across these Palm Beach County locations.</p>
+    <div class="kw-chips">
+      <a class="kw-chip" href="#homes">Palm Beach Vacation Rentals</a>
+      <a class="kw-chip" href="#homes">West Palm Beach Vacation Rentals</a>
+      <a class="kw-chip" href="#homes">Palm Beach Gardens Vacation Rentals</a>
+      <a class="kw-chip" href="#homes">Singer Island Vacation Rentals</a>
+      <a class="kw-chip" href="#homes">Juno Beach Vacation Rentals</a>
+      <a class="kw-chip" href="#homes">Jupiter Vacation Rentals</a>
+      <a class="kw-chip" href="#homes">North Palm Beach Vacation Rentals</a>
+      <a class="kw-chip" href="#homes">Lake Worth Beach Vacation Rentals</a>
+      <a class="kw-chip" href="#homes">Pet Friendly Rentals in Palm Beach</a>
+      <a class="kw-chip" href="#homes">Vacation Homes with Private Pool</a>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer id="contact">
   <div class="container">
@@ -564,15 +595,41 @@ footer{background:var(--ink);color:var(--bg)}
         <a class="brand" href="#home" style="color:inherit">Lee &amp; Michelle's
           <small style="color:inherit;opacity:.6">Palm Beach Vacation Homes</small>
         </a>
-        <p style="margin-top:var(--space-4)">Private, professionally cleaned vacation homes in quiet Palm Beach neighborhoods.</p>
+        <p style="margin-top:var(--space-4)">Private, professionally cleaned vacation homes in quiet Palm Beach neighborhoods. Keep up to date with Lee &amp; Michelle's Palm Beach Vacation Homes.</p>
         <div class="social">
           <a href="#" aria-label="Facebook">f</a>
           <a href="#" aria-label="Twitter">t</a>
         </div>
       </div>
       <div>
-        <h3>Follow Us</h3>
-        <p>Keep up to date with Lee &amp; Michelle's Palm Beach Vacation Homes.</p>
+        <h3>Locations</h3>
+        <ul>
+          <li><a href="#homes">Palm Beach</a></li>
+          <li><a href="#homes">West Palm Beach</a></li>
+          <li><a href="#homes">Palm Beach Gardens</a></li>
+          <li><a href="#homes">Singer Island</a></li>
+          <li><a href="#homes">Juno Beach</a></li>
+          <li><a href="#homes">Jupiter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Info</h3>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#homes">Vacation Homes</a></li>
+          <li><a href="#gallery">Photo Gallery</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#book">Book Now</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Cancellation Policy</a></li>
+        </ul>
       </div>
       <div>
         <h3>Contact</h3>
