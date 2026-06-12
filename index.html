@@ -230,12 +230,24 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .reviews .eyebrow{color:var(--gold-soft);justify-content:center}
 .reviews .eyebrow::before,.reviews .eyebrow::after{background:var(--gold)}
 .reviews .eyebrow::after{content:"";width:var(--space-6);height:1px}
-.stars{text-align:center;color:var(--gold);letter-spacing:var(--space-1);margin-bottom:var(--space-6);font-size:var(--text-xl)}
-.review-quote{font-family:var(--font-display);font-size:clamp(var(--text-lg),2.4vw,var(--text-xl));line-height:1.55;max-width:48rem;margin-inline:auto;text-align:center;position:relative}
-.review-author{display:flex;align-items:center;justify-content:center;gap:var(--space-3);margin-top:var(--space-6)}
-.avatar{width:var(--space-7);height:var(--space-7);border-radius:var(--radius-pill);background:var(--gold);color:var(--accent-deep);display:grid;place-items:center;font-family:var(--font-display);font-size:var(--text-lg)}
-.review-author p{font-size:var(--text-sm);opacity:.8;text-align:left;line-height:1.4}
-.review-author strong{display:block;font-size:var(--text-base);opacity:1}
+.reviews h2{text-align:center;margin-bottom:var(--space-7)}
+.reviews h2 em{color:var(--gold-soft)}
+.rev-track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - (var(--space-5) * 2)) / 3);gap:var(--space-5);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding-block:var(--space-2)}
+.rev-track::-webkit-scrollbar{display:none}
+.rev-card{scroll-snap-align:start;display:flex;flex-direction:column;gap:var(--space-4);background:color-mix(in srgb,var(--on-accent) 6%,transparent);border:1px solid color-mix(in srgb,var(--on-accent) 14%,transparent);border-radius:var(--radius-lg);padding:var(--space-6);backdrop-filter:blur(4px);transition:transform .25s ease,background .25s ease}
+.rev-card:hover{transform:translateY(-4px);background:color-mix(in srgb,var(--on-accent) 9%,transparent)}
+.rev-card .stars{font-size:var(--text-base);color:var(--gold);letter-spacing:0.15em}
+.rev-card blockquote{font-size:var(--text-sm);line-height:1.7;opacity:.92;flex:1}
+.rev-author{display:flex;align-items:center;gap:var(--space-3);border-top:1px solid color-mix(in srgb,var(--on-accent) 12%,transparent);padding-top:var(--space-4)}
+.avatar{width:var(--space-7);height:var(--space-7);flex-shrink:0;border-radius:var(--radius-pill);background:var(--gold);color:var(--accent-deep);display:grid;place-items:center;font-family:var(--font-display);font-size:var(--text-lg)}
+.rev-author p{font-size:var(--text-xs);opacity:.75;line-height:1.4}
+.rev-author strong{display:block;font-size:var(--text-sm);opacity:1;font-weight:600}
+.rev-nav{display:flex;align-items:center;justify-content:center;gap:var(--space-5);margin-top:var(--space-7)}
+.rev-btn{width:var(--space-7);height:var(--space-7);border-radius:var(--radius-pill);border:1.5px solid color-mix(in srgb,var(--on-accent) 35%,transparent);background:transparent;color:var(--on-accent);font-size:var(--text-lg);cursor:pointer;display:grid;place-items:center;transition:background .25s,border-color .25s,color .25s,transform .2s}
+.rev-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--accent-deep);transform:translateY(-2px)}
+.rev-dots{display:flex;gap:var(--space-2)}
+.rev-dots button{width:var(--space-2);height:var(--space-2);border-radius:var(--radius-pill);border:none;background:color-mix(in srgb,var(--on-accent) 30%,transparent);cursor:pointer;padding:0;transition:background .3s,transform .3s}
+.rev-dots button.active{background:var(--gold);transform:scale(1.4)}
 
 /* ============================================================
    CTA + FOOTER
@@ -274,6 +286,7 @@ footer{background:var(--ink);color:var(--bg)}
   .fac-grid{grid-template-columns:repeat(2,1fr)}
   .homes-grid{grid-template-columns:1fr;max-width:28rem;margin-inline:auto}
   .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .rev-track{grid-auto-columns:calc((100% - var(--space-5)) / 2)}
   .foot-grid{grid-template-columns:repeat(2,1fr);gap:var(--space-6)}
   .foot-grid>div:first-child{grid-column:1/-1}
   .nav-links{display:none}
@@ -283,6 +296,7 @@ footer{background:var(--ink);color:var(--bg)}
 }
 @media (max-width:40rem){
   .fac-grid{grid-template-columns:1fr}
+  .rev-track{grid-auto-columns:100%}
   .foot-grid{grid-template-columns:1fr}
   .topbar .topbar-group:last-child{display:none}
   .section{padding-block:var(--space-8)}
@@ -545,11 +559,43 @@ footer{background:var(--ink);color:var(--bg)}
 <section class="reviews section">
   <div class="container reveal">
     <p class="eyebrow">Reviews</p>
-    <div class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-    <blockquote class="review-quote">This house was great for my family! It had 4 big bedrooms, was really tidy, and had lots of room. Each room wasn't only spacious but also thoughtfully designed, making our time there extremely comfortable. From the cozy living areas to the well-appointed bedrooms, every corner of the house felt inviting. The host's care showed in every detail.</blockquote>
-    <div class="review-author">
-      <span class="avatar">Y</span>
-      <p><strong>Yaakov</strong>Verified guest</p>
+    <h2>What our guests <em>keep telling us</em></h2>
+    <div class="rev-track" id="revTrack">
+      <article class="rev-card">
+        <div class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>This house was great for my family! It had 4 big bedrooms, was really tidy, and had lots of room. Each room wasn't only spacious but also thoughtfully designed. From the cozy living areas to the well-appointed bedrooms, every corner felt inviting. The host's care showed in every detail.</blockquote>
+        <div class="rev-author"><span class="avatar">Y</span><p><strong>Yaakov</strong>Verified guest</p></div>
+      </article>
+      <article class="rev-card">
+        <div class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>Self check-in with the smart lock couldn't have been easier. We landed at PBI, and 15 minutes later we were unpacking. The pool was spotless and the backyard felt completely private. We'll absolutely stay here again.</blockquote>
+        <div class="rev-author"><span class="avatar">R</span><p><strong>Rachel</strong>Verified guest</p></div>
+      </article>
+      <article class="rev-card">
+        <div class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>The location is unbeatable. Trader Joe's and Downtown at the Gardens are 2 minutes away, and we were on the sand in 5. The street is so quiet you'd never guess how close everything is. Perfect base for our beach week.</blockquote>
+        <div class="rev-author"><span class="avatar">D</span><p><strong>David</strong>Verified guest</p></div>
+      </article>
+      <article class="rev-card">
+        <div class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>We travel with our dog and finding a real pet-friendly home isn't easy. The fenced backyard was perfect for him, and the hosts left water bowls waiting. Small touches like that made the whole trip feel effortless.</blockquote>
+        <div class="rev-author"><span class="avatar">S</span><p><strong>Sarah</strong>Verified guest</p></div>
+      </article>
+      <article class="rev-card">
+        <div class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>Cleanest rental we've ever stayed in, and we travel a lot. You can tell the 45-point cleaning process isn't just marketing. Beds were comfortable, the kitchen had everything, and parking right on the property was a bonus.</blockquote>
+        <div class="rev-author"><span class="avatar">M</span><p><strong>Michael</strong>Verified guest</p></div>
+      </article>
+      <article class="rev-card">
+        <div class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>The backyard was the highlight for our group. Mini golf, volleyball, a firepit and a hammock, so the kids never got bored. Evenings around the fire after a beach day were exactly what we'd hoped for. It's Florida living at its finest.</blockquote>
+        <div class="rev-author"><span class="avatar">L</span><p><strong>Leah</strong>Verified guest</p></div>
+      </article>
+    </div>
+    <div class="rev-nav">
+      <button class="rev-btn" id="revPrev" type="button" aria-label="Previous reviews">&lsaquo;</button>
+      <div class="rev-dots" id="revDots" aria-hidden="true"></div>
+      <button class="rev-btn" id="revNext" type="button" aria-label="Next reviews">&rsaquo;</button>
     </div>
   </div>
 </section>
@@ -660,6 +706,29 @@ footer{background:var(--ink);color:var(--bg)}
   function auto(){timer=setInterval(function(){go(i+1)},5500)}
   dots.forEach(function(d,n){d.addEventListener('click',function(){clearInterval(timer);go(n);auto()})});
   auto();
+})();
+(function(){
+  var track=document.getElementById('revTrack');
+  if(!track)return;
+  var cards=track.children,dotsWrap=document.getElementById('revDots');
+  for(var n=0;n<cards.length;n++){
+    var b=document.createElement('button');
+    b.type='button';
+    (function(idx){b.addEventListener('click',function(){track.scrollTo({left:cards[idx].offsetLeft-track.offsetLeft,behavior:'smooth'})})})(n);
+    dotsWrap.appendChild(b);
+  }
+  var dots=dotsWrap.children;
+  function step(){return cards[0].getBoundingClientRect().width+parseFloat(getComputedStyle(track).columnGap||0)}
+  function sync(){
+    var idx=Math.round(track.scrollLeft/step());
+    idx=Math.max(0,Math.min(idx,dots.length-1));
+    for(var k=0;k<dots.length;k++)dots[k].classList.toggle('active',k===idx);
+  }
+  document.getElementById('revPrev').addEventListener('click',function(){track.scrollBy({left:-step(),behavior:'smooth'})});
+  document.getElementById('revNext').addEventListener('click',function(){track.scrollBy({left:step(),behavior:'smooth'})});
+  var raf;
+  track.addEventListener('scroll',function(){cancelAnimationFrame(raf);raf=requestAnimationFrame(sync)});
+  sync();
 })();
 (function(){
   var els=document.querySelectorAll('.reveal');
