@@ -39,7 +39,7 @@
   --text-xl:1.45rem;
   --text-2xl:clamp(1.8rem,3vw,2.4rem);
   --text-3xl:clamp(2.2rem,4vw,3rem);
-  --text-hero:clamp(2.8rem,6.5vw,5rem);
+  --text-hero:clamp(3.2rem,8vw,6rem);
   --leading-body:1.7;
   --leading-tight:1.1;
   --tracking-wide:0.16em;
@@ -120,18 +120,36 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 /* ============================================================
    HERO (full bleed)
    ============================================================ */
-.hero{position:relative;min-height:86vh;display:flex;align-items:center;color:var(--on-accent);isolation:isolate;overflow:hidden}
+.hero{position:relative;min-height:94vh;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--on-accent);isolation:isolate;overflow:hidden}
 .hero-bg{position:absolute;inset:0;z-index:-2}
-.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,var(--overlay-soft) 0%,var(--overlay) 70%)}
-.hero-inner{padding-block:var(--space-9) calc(var(--space-9) + var(--space-7));max-width:46rem}
-.hero .eyebrow{color:var(--gold-soft)}
+.hero-bg img{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease}
+.hero-bg img.active{opacity:1;animation:kenburns 8s ease-out forwards}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08)}}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,var(--overlay-soft) 0%,var(--overlay) 75%)}
+.hero-inner{padding-block:var(--space-9) calc(var(--space-9) + var(--space-8));max-width:54rem;margin-inline:auto}
+.hero-inner>*{opacity:0;animation:heroUp .9s ease forwards}
+.hero-inner>*:nth-child(1){animation-delay:.15s}
+.hero-inner>*:nth-child(2){animation-delay:.3s}
+.hero-inner>*:nth-child(3){animation-delay:.5s}
+.hero-inner>*:nth-child(4){animation-delay:.7s}
+@keyframes heroUp{from{opacity:0;transform:translateY(var(--space-6))}to{opacity:1;transform:none}}
+.hero .eyebrow{color:var(--gold-soft);justify-content:center}
 .hero .eyebrow::before{background:var(--gold)}
+.hero .eyebrow::after{content:"";width:var(--space-6);height:1px;background:var(--gold)}
 .hero h1{font-size:var(--text-hero);margin-bottom:var(--space-5);text-wrap:balance}
 .hero h1 em{color:var(--gold-soft)}
-.hero p{font-size:var(--text-lg);max-width:32rem;opacity:.92}
-.hero-stats{display:flex;gap:var(--space-6);margin-top:var(--space-7);flex-wrap:wrap}
+.hero p{font-size:var(--text-xl);max-width:38rem;margin-inline:auto;opacity:.92;line-height:1.55}
+.hero-stats{display:flex;justify-content:center;gap:var(--space-6);margin-top:var(--space-7);flex-wrap:wrap}
 .hero-stat{font-size:var(--text-sm);opacity:.9;display:flex;align-items:center;gap:var(--space-2)}
 .hero-stat .icon{width:var(--space-4);height:var(--space-4);color:var(--gold-soft)}
+.hero-dots{position:absolute;bottom:calc(var(--space-8) + var(--space-7));left:50%;transform:translateX(-50%);display:flex;gap:var(--space-3);z-index:3}
+.hero-dots button{width:var(--space-3);height:var(--space-3);border-radius:var(--radius-pill);border:1.5px solid var(--on-accent);background:transparent;cursor:pointer;padding:0;transition:background .3s,transform .3s}
+.hero-dots button:hover{transform:scale(1.25)}
+.hero-dots button.active{background:var(--gold);border-color:var(--gold)}
+@media (prefers-reduced-motion:reduce){
+  .hero-bg img.active{animation:none}
+  .hero-inner>*{animation:none;opacity:1}
+}
 
 /* floating booking card */
 .booking-wrap{position:relative;z-index:5;margin-top:calc(var(--space-8) * -1)}
@@ -313,7 +331,14 @@ footer{background:var(--ink);color:var(--bg)}
 <!-- HERO -->
 <header class="hero" id="home">
   <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2000&q=75" alt="Private vacation home with pool in Palm Beach, Florida" loading="eager">
+    <img class="active" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2000&q=75" alt="Private vacation home with pool in Palm Beach, Florida" loading="eager">
+    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=2000&q=75" alt="Modern villa with pool lit at dusk" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=2000&q=75" alt="Vacation home exterior in the evening" loading="lazy">
+  </div>
+  <div class="hero-dots" role="tablist" aria-label="Hero image slider">
+    <button class="active" type="button" aria-label="Show image 1"></button>
+    <button type="button" aria-label="Show image 2"></button>
+    <button type="button" aria-label="Show image 3"></button>
   </div>
   <div class="container">
     <div class="hero-inner">
@@ -566,6 +591,19 @@ footer{background:var(--ink);color:var(--bg)}
 </footer>
 
 <script>
+(function(){
+  var slides=document.querySelectorAll('.hero-bg img');
+  var dots=document.querySelectorAll('.hero-dots button');
+  var i=0,timer;
+  function go(n){
+    slides[i].classList.remove('active');dots[i].classList.remove('active');
+    i=(n+slides.length)%slides.length;
+    slides[i].classList.add('active');dots[i].classList.add('active');
+  }
+  function auto(){timer=setInterval(function(){go(i+1)},5500)}
+  dots.forEach(function(d,n){d.addEventListener('click',function(){clearInterval(timer);go(n);auto()})});
+  auto();
+})();
 (function(){
   var els=document.querySelectorAll('.reveal');
   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
